@@ -8,7 +8,7 @@ class Database
 
 	function __construct()
 	{
-		$db=new MongoDB\Client("mongodb:localhost:27017");
+		$this->db=(new MongoDB\Client())->probamunka;
 	}
 }
 ?>

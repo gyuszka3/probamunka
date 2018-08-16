@@ -1,10 +1,17 @@
 <?php 
 require 'vendor/autoload.php';
 require 'class/Add.php';
+require 'class/Del_old.php';
+
 if(isset($_POST["new"]))
 {
 	$add=new Add();
 	$add->insert_new($_POST["lang_code"],$_POST["entity_type"],$_POST["full_url"],$_POST["http_code"],$_POST["action"]);
+}
+if(isset($_POST["remove"]))
+{
+	$remove=new Del_old();
+	$remove->delete();
 }
 ?>
 <!DOCTYPE html>
@@ -20,10 +27,10 @@ if(isset($_POST["new"]))
 <div class="container-fluid bg-dark">
 	<div class="">
 		<div class="row col-12 py-3 justify-content-around">
-			<button class="text-center col-2 btn btn-light">Új bejegyzés létrehozása</button>
-			<button class="text-center col-2 btn btn-light">Bejegyzés frissítése</button>
-			<button class="text-center col-2 btn btn-light">Bejegyzés feloldása url alapján</button>
-			<button class="text-center col-2 btn btn-light">Entitáshoz tartozó url-ek lekérdezése</button>
+			<button class="text-center  btn btn-light">Új bejegyzés létrehozása</button>
+			<button class="text-center  btn btn-light">Bejegyzés frissítése</button>
+			<button class="text-center 	btn btn-light">Bejegyzés feloldása url alapján</button>
+			<button class="text-center  btn btn-light">Entitáshoz tartozó url-ek lekérdezése</button>
 		</div>
 		<div class="content" id="nav-tabContent">
 			<form method="post" action="" class="form-group text-light p-2 d-none">
@@ -38,12 +45,15 @@ if(isset($_POST["new"]))
 					<option value="USER">USER</option>
 				</select>
 				<label>Teljes URL:</label>
-				<input class="form-control" type="text" name="full_url">
+				<input class="form-control" type="text" name="full_url" pattern="[a-zA-Z-_/.]{0,}">
 				<label>HTTP kód:</label>
 				<input class="form-control" type="number" name="http_code">
 				<label>Elvégezendő metodús:</label>
 				<input class="form-control mb-3" type="text" name="action">
 				<input class="btn btn-light form-control" type="submit" name="new" value="Hozzáad">
+			</form>
+			<form method="post" action="" class="form-group text-light p-2 d-none">
+				<input class="btn btn-light form-control" type="submit" name="remove" value="Törlés">
 			</form>
 		</div>
 	</div>

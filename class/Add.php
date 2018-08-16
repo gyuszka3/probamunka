@@ -14,14 +14,15 @@ class Add extends SQL
 	{
 		$parts=explode("/",$full_url);
 		array_shift($parts);
+		$date=new MongoDB\BSON\UTCDateTime();
 		$array=[
 			"languageCode" => $lang_code,
 			"entityId" =>	parent::get_entyityId($entity_type),
 			"entityType" => $entity_type,
-			"createdAt" => date("Y-m-d"),
-			"updatedAt" => date("Y-m-d"),
+			"createdAt" => $date,
+			"updatedAt" => $date,
 			"FullURL" => $full_url,
-			"httpCode" => $http_code,
+			"httpCode" => intval($http_code),
 			"action" => $action,
 			"parts" => $parts
 		];

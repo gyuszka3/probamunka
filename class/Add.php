@@ -16,10 +16,10 @@ class Add extends SQL
 		array_shift($parts);
 		$array=[
 			"languageCode" => $lang_code,
-			"entityId" =>	0,
+			"entityId" =>	parent::get_entyityId($entity_type),
 			"entityType" => $entity_type,
-			"createdAt" => 20180101,
-			"updatedAt" => "",
+			"createdAt" => date("Y-m-d"),
+			"updatedAt" => date("Y-m-d"),
 			"FullURL" => $full_url,
 			"httpCode" => $http_code,
 			"action" => $action,

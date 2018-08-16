@@ -13,5 +13,16 @@ class SQL extends Database
 	{
 		$this->db->probamunka->insertOne($array);
 	}
+	function get_entyityId($entityType)
+	{
+		$result=$this->db->probamunka->find(["entityType" => $entityType]);
+		$index=0;
+		foreach ($result as $key)
+		{
+			$index++;
+		}
+
+		return $index;
+	}
 }
 ?>

@@ -10,18 +10,21 @@ class Add extends SQL
 	{
 		parent::__construct();
 	}
-	function insert_new($lang_code,$entity_type,$full_url,$http_code,$action)
+	function insert_new($lang_code,$entity_type,$http_code,$action,$parts)
 	{
-		$parts=explode("/",$full_url);
-		array_shift($parts);
+		$full_url=$lang_code.".example.com";
+		foreach ($parts as $ertek)
+		{
+			$full_url=$full_url."/".$ertek;
+		}
 		$date=new MongoDB\BSON\UTCDateTime();
 		$array=[
 			"languageCode" => $lang_code,
-			"entityId" =>	parent::get_entyityId($entity_type),
+			"entityId" =>	parent::count_entyityId($entity_type),
 			"entityType" => $entity_type,
 			"createdAt" => $date,
 			"updatedAt" => $date,
-			"FullURL" => $full_url,
+			"fullUrl" => $full_url,
 			"httpCode" => intval($http_code),
 			"action" => $action,
 			"parts" => $parts

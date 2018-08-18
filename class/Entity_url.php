@@ -11,11 +11,15 @@ class Entity_url extends SQL
     {
         parent::__construct();
     }
-    public function get_ids($entity_type)
+    public function get_ids($entity_id)
     {
-    	$result=parent::get_entityId($entity_type);
-
-    	return $result;
+    	$result=parent::get_entityId($entity_id);
+        $data =[];
+        foreach ($result as $value) 
+        {
+            array_push($data, $value["fullUrl"]);
+        }
+    	return $data;
     }
 }
 ?>

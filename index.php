@@ -6,10 +6,11 @@ require 'class/Update.php';
 require 'class/Resolve.php';
 require 'class/Entity_url.php';
 
+$update=new Update();
 if(isset($_POST["new"]))
 {
 	$add=new Add();
-	$add->insert_new($_POST["lang_code"],$_POST["entity_type"],$_POST["http_code"],$_POST["action"],$_POST["parts"]);
+	$add->insert_new($_POST["hostname"],$_POST["lang_code"],$_POST["entity_type"],$_POST["http_code"],$_POST["action"],$_POST["parts"]);
 }
 if(isset($_POST["remove"]))
 {
@@ -18,8 +19,7 @@ if(isset($_POST["remove"]))
 }
 if(isset($_POST["update"]))
 {
-	$update=new Update();
-	$update->update($_POST["module_id"],$_POST["module_type"],$_POST["lang_code"],$_POST["action"],$_POST["full_url"]);
+	$update->update($_POST["update_id"],$_POST["module_id"],$_POST["module_type"],$_POST["lang_code"],$_POST["action"],$_POST["full_url"]);
 }
 if(isset($_POST["resolve"]))
 {
@@ -48,6 +48,8 @@ if(isset($_POST["resolve"]))
 		</div>
 		<div class="content" id="nav-tabContent">
 			<form method="post" action="" class="form-group text-light p-2 d-none">
+				<label>Hosztnév:</label>
+				<input class="form-control" type="text" name="hostname" pattern="{0,2}">
 				<label>Nyelvi kód:</label>
 				<input class="form-control" type="text" name="lang_code" pattern="{0,2}">
 				<label>Entitás típus:</label>
@@ -63,11 +65,20 @@ if(isset($_POST["resolve"]))
 				<label>Elvégezendő metodús:</label>
 				<input class="form-control " type="text" name="action">
 				<label>Részek:</label>
-				<input class="form-control" type="text" name="parts[]" pattern="[a-zA-Z-_/.]{0,}">
+				<input class="form-control" type="text" name="parts[]">
 				<a class="btn link mb-3">Rész hozzáadása</a>
 				<input class="btn btn-light form-control" type="submit" name="new" value="Hozzáad">
 			</form>
 			<form method="post" action="" class="form-group text-light p-2 d-none">
+				<select class="form-control" name="update_id">
+					<?php 
+						$result=$update->list();
+						foreach ($result as $value) {
+							echo "<option value=$value>$value</option>";
+						}
+						unset($result);
+					?>
+				</select>
 				<label>Modul azonosito:</label>
 				<input class="form-control" type="text" name="module_id">
 				<label>Modul típus:</label>
@@ -89,14 +100,8 @@ if(isset($_POST["resolve"]))
 				<input class="btn btn-light form-control" type="submit" name="resolve" value="Feloldás">
 			</form>
 			<form method="post" action="" class="form-group text-light p-2 d-none">
-				<label>Entitás típus:</label>
-				<select class="form-control" name="entity_type">
-					<option value="PARTNER">PARTNER</option>
-					<option value="CONTENT">CONTENT</option>
-					<option value="FAMILY">FAMILY</option>
-					<option value="PRODUCT">PRODUCT</option>
-					<option value="USER">USER</option>
-				</select>
+				<label>Entitás azonosítoja:</label>
+				<input class="form-control" type="number" name="entity_id">
 				<input class="btn btn-light form-control" type="submit" name="urls" value="Listázás">
 			</form>
 		</div>
@@ -105,14 +110,14 @@ if(isset($_POST["resolve"]))
 			if(isset($_POST["urls"]))
 			{
 				$entity_url=new Entity_url();
-				$result=$entity_url->get_ids($_POST["entity_type"]);
+				$result=$entity_url->get_ids($_POST["entity_id"]);
 			}
 			if (isset($result) && $result) 
 			{
 				echo "<table class='table table-dark'>";
 				foreach ($result as $value) 
 				{
-					echo "<tr><td>".$value["entityId"]."</td><td>".$value["fullUrl"]."</td></tr>";
+					echo "<tr><td>".$value."</td></tr>";
 				}
 				echo "</table>";
 			}

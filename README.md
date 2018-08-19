@@ -38,3 +38,25 @@ majd másolja be a mongodb.dll fájlt a xampp/php/ext mappába.
  MongoDB Compass
  ```
  ## Funkciók
+ 
+### Új begyezés
+ Új bejegyzést hozz létre az adatbázisba, illetve teljes URL-t készít.
+ A paraméterben megadott hosztnév,nyelvi kód,entitás típusás illetve azonositóját,a metodust aminek végre kell hajtódnia, illetve az url részeit használja.A teljes URL-t a hosztnévből nyelvikódból illetve a url részekből épiti fel majd ellenőrzi hogy tartalmaz-e az angol ABC-n és a "/_-" kivüli karakterekt. Ha nem beirja az adatbázisba ellenkező esetben nem.
+
+### Bejegyzés frissitése
+Már meglévő bejegyzést frissit.
+A paraméterben megadott bejegyzés azonositot,modul azonositot és tipust,nyelvi kódot,végrehajtandó metodust,és a teljes URL-t használja.
+Elöször is megvizsgálja hogy a modul típusa és azonositója, a nyelvi kód, végrehajtandó metodus és a teljes URL adatok egyeznek a tárolt verzióval. Ha igen akkor nem történik adatmódosítás hanem a bejegyzéssel tér vissza a program.Ellenkező esetben a tárolt változat HTTP kódját átirja 301-re illetve, új bejegyzést hozz létre a tárolt változattal kiegészitve a cél URL megadaásával.
+
+### Idejétmúlt bejegyzések törlése
+A három napnál régebbi és 301-es HTTP kóddal rendelkező bejegyzéseket törli.
+Az adatbázisból lekéri az összes értéket és egyenként vizsgálja azoknak frissitési dátumát. Amely régebbi mint 3 nap azt törli.
+
+### Bejegyzés feloldása
+Átirányitás végző metodus.
+A paramétreben megadott teljes URL használtaával müködik.
+Megkeresi az adatbázisban a kapott URL-t majd megvizsgálja hogy van-e olyan amely 200-as HTTP kóddal rendelkezik. Ebben az esetben a bejegyzéssel tér vissza a program.Ellenkező esetben megkeresi az időrendben a legutolsó bejegyzést ahol a teljes URL egyezik és a HTTP kódja 301, majd átirányitja a bejegzésben tárolt cél URL cimre. Végső esetben pedig a program a "notfound.php" címre irányít át.
+
+###Entitáshoz tartózó URL lekérdezése
+Egy adott enitátshoz tartozo URL lekérdezését végzi.
+A paraméterben megadott etitás azonosító alapján kilistázza a teljes URL címeket, minden olyan bejegyzésnél ahol az entitás azonosito megegyezik.

@@ -1,7 +1,17 @@
 {
+    "name": "polyanka_gyorgy/proba_munka",
+    "type": "project",
     "require": {
         "mongodb/mongodb": "1.1.0",
+        "php": "7.1.20",
         "twbs/bootstrap": "^4.1",
         "components/jquery": "^3.3"
-    }
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Polyanka Gyorgy",
+            "email": "p.gyuszi97@gmail.com"
+        }
+    ]
 }

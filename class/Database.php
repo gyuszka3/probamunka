@@ -1,14 +1,13 @@
-<?php 
+<?php
 /**
- * 
+ *
  */
 class Database
 {
-	public $db;
+    public $db;
 
-	function __construct()
-	{
-		$this->db=(new MongoDB\Client())->probamunka;
-	}
+    public function __construct()
+    {
+        $this->db=(new MongoDB\Client())->probamunka;
+    }
 }
-?>

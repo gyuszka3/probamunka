@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * summary
  */
@@ -13,13 +13,11 @@ class Entity_url extends SQL
     }
     public function get_ids($entity_id)
     {
-    	$result=parent::get_entityId($entity_id);
+        $result=parent::get_entityId($entity_id);
         $data =[];
-        foreach ($result as $value) 
-        {
+        foreach ($result as $value) {
             array_push($data, $value["fullUrl"]);
         }
-    	return $data;
+        return $data;
     }
 }
-?>

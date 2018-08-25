@@ -1,17 +1,15 @@
 <?php
 /**
- * 
+ *
  */
 class Del_old extends SQL
 {
-	
-	function __construct()
-	{
-		parent::__construct();
-	}
-	function delete()
-	{
-		parent::delete_old();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    public function delete()
+    {
+        parent::delete_old();
+    }
 }
-?>

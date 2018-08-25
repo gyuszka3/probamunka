@@ -5,7 +5,8 @@
         "mongodb/mongodb": "1.1.*",
         "php": ">=7.1.20",
         "twbs/bootstrap": "^4.1",
-        "components/jquery": "^3.3"
+        "components/jquery": "^3.3",
+        "squizlabs/php_codesniffer": "*"
     },
     "license": "proprietary",
     "authors": [
